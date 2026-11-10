@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fixed Gear Calculator — mockup</title>
+<style>
+:root {
+  --bg:#f6f5f2; --surface:#fff; --border:#dcdad4; --text:#1a1a1a; --muted:#6b6b6b;
+  --skid:#e6004c; --ambi:#0077e6; --metal:#3a3a3a; --spoke:#c4c2bc;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#141414; --surface:#1e1e1e; --border:#333; --text:#f0f0f0; --muted:#a0a0a0;
+    --skid:#ff3d7f; --ambi:#4da6ff; --metal:#c8c8c8; --spoke:#444; }
+}
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--text);
+  font:16px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+main { max-width:480px; margin:0 auto; padding:16px; display:grid; gap:12px; }
+h1 { font-size:1.35rem; font-style:italic; font-weight:800; margin:8px 0 0; letter-spacing:-.01em; }
+h1 span { color:var(--skid); }
+h2 { font-size:.8rem; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); margin:0 0 8px; font-weight:600; }
+.card { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:14px; }
+.bar { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+.seg { display:inline-flex; border:1px solid var(--border); border-radius:8px; overflow:hidden; background:var(--surface); }
+.seg button { border:0; background:none; color:var(--muted); font:inherit; font-size:.85rem; padding:6px 12px; cursor:pointer; }
+.seg button[aria-checked=true] { background:var(--text); color:var(--bg); font-weight:600; }
+.about { margin-left:auto; color:var(--skid); font-size:.85rem; }
+.steppers { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+label, .lbl { display:block; font-size:.8rem; color:var(--muted); margin-bottom:4px; }
+.stepper { display:flex; border:1px solid var(--border); border-radius:8px; overflow:hidden; }
+.stepper button { width:44px; height:44px; border:0; background:var(--bg); color:var(--text); font-size:1.3rem; cursor:pointer; }
+.stepper input { flex:1; min-width:0; border:0; background:none; color:var(--text); text-align:center;
+  font:700 1.25rem system-ui; font-variant-numeric:tabular-nums; }
+select { width:100%; height:44px; border:1px solid var(--border); border-radius:8px; background:var(--surface);
+  color:var(--text); font:inherit; padding:0 10px; }
+.row { margin-top:12px; }
+.toggle { display:flex; align-items:center; justify-content:space-between; font-size:.9rem; }
+.toggle input { width:20px; height:20px; accent-color:var(--ambi); }
+svg { display:block; width:100%; height:auto; }
+.results { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; text-align:center; }
+.results button { border:0; background:none; font:inherit; font-size:.8rem; color:var(--skid); text-decoration:underline dotted; cursor:pointer; padding:0; }
+.val { font-size:1.75rem; font-weight:700; font-variant-numeric:tabular-nums; line-height:1.2; }
+.val small { font-size:.8rem; font-weight:500; color:var(--muted); }
+.sub { font-size:.75rem; color:var(--muted); }
+.ambi { color:var(--ambi); }
+.speeds { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; }
+.speeds div { border:1px solid var(--border); border-radius:8px; padding:6px 8px; text-align:center; }
+.speeds b { display:block; font-size:1.05rem; font-variant-numeric:tabular-nums; }
+.speeds span { font-size:.72rem; color:var(--muted); }
+.speeds .hl { border-color:var(--skid); box-shadow:inset 0 0 0 1px var(--skid); }
+.chips { display:flex; flex-wrap:wrap; gap:6px; }
+.chips button { border:1px solid var(--border); background:var(--surface); color:var(--text); border-radius:999px;
+  padding:5px 10px; font:inherit; font-size:.85rem; font-variant-numeric:tabular-nums; cursor:pointer; }
+.chips button i { font-style:normal; color:var(--muted); margin-left:4px; }
+.chips .better { border-color:var(--skid); }
+.chips .better i { color:var(--skid); font-weight:700; }
+.chips [aria-current] { background:var(--text); color:var(--bg); }
+.chips [aria-current] i { color:inherit; opacity:.7; }
+.legend { font-size:.75rem; color:var(--muted); margin:8px 0 0; }
+footer { font-size:.75rem; color:var(--muted); text-align:center; padding:8px 0 24px; }
+footer a { color:inherit; }
+@media (min-width:720px) {
+  main { max-width:760px; grid-template-columns:1fr 1fr; }
+  header, .full { grid-column:1 / -1; }
+}
+</style>
+</head>
+<body>
+<main>
+  <aside class="full" style="border-left:4px solid var(--skid);background:var(--surface);border-radius:10px;padding:12px 14px;font-size:.9rem">
+    <strong>A preservation of SURPLACE's Fantastic Fixed Gear Calculator.</strong>
+    All credit goes to the SURPLACE team. This copy exists only to keep their calculator
+    available in case <a href="#" style="color:var(--skid)">surplace.fr/ffgc</a> goes down.
+  </aside>
+  <header>
+    <h1>Fixed Gear <span>Calculator</span></h1>
+    <div class="bar" style="margin-top:10px">
+      <div class="seg" role="radiogroup" aria-label="Language">
+        <button role="radio" aria-checked="true">EN</button><button role="radio" aria-checked="false">FR</button>
+      </div>
+      <div class="seg" role="radiogroup" aria-label="Units">
+        <button role="radio" aria-checked="true">Metric</button><button role="radio" aria-checked="false">Imperial</button>
+      </div>
+      <a class="about" href="#">About</a>
+    </div>
+  </header>
+
+  <section class="card">
+    <h2>Gear</h2>
+    <div class="steppers">
+      <div><label for="r">Chainring</label>
+        <div class="stepper"><button aria-label="Fewer teeth">−</button><input id="r" inputmode="numeric" value="46"><button aria-label="More teeth">+</button></div></div>
+      <div><label for="s">Sprocket</label>
+        <div class="stepper"><button aria-label="Fewer teeth">−</button><input id="s" inputmode="numeric" value="18"><button aria-label="More teeth">+</button></div></div>
+    </div>
+    <div class="row"><label for="t">Tire</label>
+      <select id="t">
+        <optgroup label="700C (622)"><option>700×23 (23-622) — 2097 mm</option><option>700×25 (25-622) — 2105 mm</option><option>700×28 (28-622) — 2136 mm</option></optgroup>
+        <optgroup label="26&quot; (559)"><option>26×1.9 (47-559) — 2055 mm</option></optgroup>
+        <option>Custom circumference…</option>
+      </select></div>
+    <div class="row toggle"><label for="a" style="margin:0;font-size:.9rem;color:var(--text)">Ambidextrous skid</label><input id="a" type="checkbox" checked></div>
+  </section>
+
+  <section class="card" aria-label="Drivetrain drawing">
+    <svg viewBox="0 0 300 170" role="img" aria-label="Wheel with 9 skid patches, 18 ambidextrous">
+      <!-- spokes -->
+      <g stroke="var(--spoke)" stroke-width="1">
+        <path d="M85 85 L85 20M85 85 L85 150M85 85 L20 85M85 85 L150 85M85 85 L39 39M85 85 L131 131M85 85 L39 131M85 85 L131 39M85 85 L60 25M85 85 L110 145M85 85 L25 110M85 85 L145 60M85 85 L25 60M85 85 L145 110M85 85 L60 145M85 85 L110 25"/>
+      </g>
+      <!-- rim + tire -->
+      <circle cx="85" cy="85" r="65" fill="none" stroke="var(--spoke)" stroke-width="3"/>
+      <circle cx="85" cy="85" r="72" fill="none" stroke="var(--metal)" stroke-width="5"/>
+      <!-- skid patches: circumference 452.4, 9 patches, period 50.27 -->
+      <circle cx="85" cy="85" r="72" fill="none" stroke="var(--skid)" stroke-width="8" stroke-dasharray="10 40.27" transform="rotate(-90 85 85)"/>
+      <circle cx="85" cy="85" r="72" fill="none" stroke="var(--ambi)" stroke-width="8" stroke-dasharray="10 40.27" stroke-dashoffset="-25.13" transform="rotate(-90 85 85)"/>
+      <!-- chain -->
+      <path d="M85 77 L215 63 A22 22 0 0 1 215 107 L85 93 A8 8 0 0 1 85 77Z" fill="none" stroke="var(--muted)" stroke-width="2"/>
+      <!-- sprocket 18t, chainring 46t -->
+      <circle cx="85" cy="85" r="8" fill="var(--metal)" stroke="var(--metal)" stroke-width="3" stroke-dasharray="1.4 1.4"/>
+      <circle cx="215" cy="85" r="20" fill="none" stroke="var(--metal)" stroke-width="5"/>
+      <circle cx="215" cy="85" r="23" fill="none" stroke="var(--metal)" stroke-width="3" stroke-dasharray="1.57 1.57"/>
+      <g stroke="var(--metal)" stroke-width="4" stroke-linecap="round">
+        <path d="M215 85 L215 67M215 85 L232 79.5M215 85 L225.6 99.6M215 85 L204.4 99.6M215 85 L198 79.5"/>
+      </g>
+      <circle cx="215" cy="85" r="4" fill="var(--metal)"/>
+      <text x="85" y="166" text-anchor="middle" font-size="10" fill="var(--muted)">18 t</text>
+      <text x="215" y="125" text-anchor="middle" font-size="10" fill="var(--muted)">46 t</text>
+    </svg>
+  </section>
+
+  <section class="card full" aria-live="polite">
+    <h2>Analysis</h2>
+    <div class="results">
+      <div><button>Ratio</button><div class="val">2.56</div><div class="sub">46 ÷ 18</div></div>
+      <div><button>Skid patches</button><div class="val">9 <small class="ambi">/ 18</small></div><div class="sub">single / <span class="ambi">ambidextrous</span></div></div>
+      <div><button>Development</button><div class="val">5.36 <small>m</small></div><div class="sub">67.2 gear inches</div></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Cadence / Speed</h2>
+    <div class="speeds">
+      <div><b>16.1</b><span>km/h @ 50 rpm</span></div>
+      <div><b>19.3</b><span>km/h @ 60 rpm</span></div>
+      <div><b>22.5</b><span>km/h @ 70 rpm</span></div>
+      <div><b>25.7</b><span>km/h @ 80 rpm</span></div>
+      <div class="hl"><b>28.9</b><span>km/h @ 90 rpm</span></div>
+      <div><b>32.2</b><span>km/h @ 100 rpm</span></div>
+      <div><b>35.4</b><span>km/h @ 110 rpm</span></div>
+      <div><b>38.6</b><span>km/h @ 120 rpm</span></div>
+      <div><b>41.8</b><span>km/h @ 130 rpm</span></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Equivalent gears ±2 %</h2>
+    <div class="chips">
+      <button>36×14<i>7</i></button>
+      <button class="better">41×16<i>16</i></button>
+      <button class="better">43×17<i>17</i></button>
+      <button class="better">44×17<i>17</i></button>
+      <button aria-current="true">46×18<i>9</i></button>
+      <button class="better">48×19<i>19</i></button>
+      <button class="better">49×19<i>19</i></button>
+      <button class="better">51×20<i>20</i></button>
+      <button>52×20<i>5</i></button>
+      <button>54×21<i>7</i></button>
+    </div>
+    <p class="legend">Second number = skid patches. Outlined gears wear the tire more evenly than yours.</p>
+  </section>
+
+  <footer class="full">
+    All credit: SURPLACE (the calculator) · Sheldon Brown (tire data) ·
+    lajalousie (ambidextrous method) · <a href="#">Source</a> · Public domain
+  </footer>
+</main>
+</body>
+</html>

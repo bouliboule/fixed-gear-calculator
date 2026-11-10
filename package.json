@@ -1,0 +1,9 @@
+{
+  "name": "fixed-gear-calculator",
+  "private": true,
+  "type": "module",
+  "license": "Unlicense",
+  "scripts": {
+    "test": "node --test tests/"
+  }
+}

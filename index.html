@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fixed Gear Calculator</title>
+<meta name="description" content="A preservation copy of SURPLACE's Fantastic Fixed Gear Calculator (surplace.fr/ffgc): ratio, skid patches, development, gear inches and speed at cadence. All credit goes to the SURPLACE team.">
+<meta property="og:title" content="Fixed Gear Calculator">
+<meta property="og:description" content="A preservation copy of SURPLACE's Fantastic Fixed Gear Calculator. All credit goes to the SURPLACE team.">
+<meta name="theme-color" content="#f6f5f2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141414" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/style.css">
+<script type="module" src="js/app.js"></script>
+</head>
+<body>
+<main>
+  <aside class="tribute full" role="note">
+    <strong data-i18n="tributeTitle">This is a preservation copy, not an original work.</strong>
+    <p data-i18n-html="tributeBody">Everything here is the work of the SURPLACE team and their Fantastic Fixed Gear Calculator (surplace.fr/ffgc). All credit goes to them.</p>
+  </aside>
+
+  <header class="full">
+    <h1 data-i18n="title">Fixed Gear Calculator</h1>
+    <p class="subtitle" data-i18n="subtitle">After SURPLACE's Fantastic Fixed Gear Calculator</p>
+    <div class="bar">
+      <fieldset class="seg">
+        <legend class="sr" data-i18n="language">Language</legend>
+        <input type="radio" name="lang" id="l-en" value="en"><label for="l-en">EN</label>
+        <input type="radio" name="lang" id="l-fr" value="fr"><label for="l-fr">FR</label>
+      </fieldset>
+      <fieldset class="seg">
+        <legend class="sr" data-i18n="units">Units</legend>
+        <input type="radio" name="unit" id="u-m" value="m"><label for="u-m" data-i18n="metric">Metric</label>
+        <input type="radio" name="unit" id="u-i" value="i"><label for="u-i" data-i18n="imperial">Imperial</label>
+      </fieldset>
+      <button type="button" class="link about" id="about-btn" data-i18n="about">About</button>
+    </div>
+  </header>
+
+  <section class="card" aria-labelledby="h-gear">
+    <h2 id="h-gear" data-i18n="gear">Gear</h2>
+    <div class="steppers">
+      <div>
+        <label for="ring" data-i18n="ring">Chainring</label>
+        <div class="stepper" data-for="ring">
+          <button type="button" data-step="-1" data-i18n-aria="fewer">−</button>
+          <input id="ring" type="number" inputmode="numeric" min="20" max="70">
+          <button type="button" data-step="1" data-i18n-aria="more">+</button>
+        </div>
+      </div>
+      <div>
+        <label for="sprocket" data-i18n="sprocket">Sprocket</label>
+        <div class="stepper" data-for="sprocket">
+          <button type="button" data-step="-1" data-i18n-aria="fewer">−</button>
+          <input id="sprocket" type="number" inputmode="numeric" min="9" max="30">
+          <button type="button" data-step="1" data-i18n-aria="more">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <label for="tire" data-i18n="tire">Tire</label>
+      <select id="tire"></select>
+    </div>
+    <div class="row" id="custom-row" hidden>
+      <label for="custom" data-i18n="customLabel">Circumference (mm)</label>
+      <input id="custom" type="number" inputmode="numeric" min="500" max="3500" class="field">
+    </div>
+    <div class="row toggle">
+      <label for="ambi" data-i18n="ambi">Ambidextrous skid</label>
+      <input id="ambi" type="checkbox">
+    </div>
+  </section>
+
+  <section class="card drawing">
+    <svg id="wheel" viewBox="0 0 300 178" role="img"></svg>
+  </section>
+
+  <section class="card full" aria-labelledby="h-analysis">
+    <h2 id="h-analysis" data-i18n="analysis">Analysis</h2>
+    <div class="results" aria-live="polite">
+      <div><button type="button" class="link" data-help="ratio" data-i18n="ratio">Ratio</button>
+        <div class="val" id="v-ratio"></div><div class="sub" id="s-ratio"></div></div>
+      <div><button type="button" class="link" data-help="patches" data-i18n="patches">Skid patches</button>
+        <div class="val" id="v-patches"></div><div class="sub" id="s-patches"></div></div>
+      <div><button type="button" class="link" id="dev-label" data-help="development" data-i18n="development">Development</button>
+        <div class="val" id="v-dev"></div><div class="sub" id="s-dev"></div></div>
+    </div>
+  </section>
+
+  <section class="card" aria-labelledby="h-speed">
+    <h2 id="h-speed" data-i18n="speed">Cadence / Speed</h2>
+    <div class="speeds" id="speeds"></div>
+  </section>
+
+  <section class="card" aria-labelledby="h-eq">
+    <h2 id="h-eq" data-i18n="equivalents">Equivalent gears ±2 %</h2>
+    <div class="chips" id="equivalents"></div>
+    <p class="legend" data-i18n="eqLegend"></p>
+  </section>
+
+  <footer class="full" data-i18n-html="footer"></footer>
+</main>
+
+<dialog id="dialog">
+  <h3 id="dialog-title"></h3>
+  <div id="dialog-body"></div>
+  <form method="dialog"><button class="btn" data-i18n="close">Close</button></form>
+</dialog>
+
+<noscript><p style="text-align:center">This calculator needs JavaScript. The original is at <a href="https://www.surplace.fr/ffgc/">surplace.fr/ffgc</a>.</p></noscript>
+</body>
+</html>
