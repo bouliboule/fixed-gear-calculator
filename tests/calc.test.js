@@ -1,5 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { parseEtrto } from '../js/tires.js';
 import { gcd, ratio, skidPatches, developmentM, gearInches, speedKmh, equivalents, analyse } from '../js/calc.js';
 
 const close = (a, b, eps = 0.01) => assert.ok(Math.abs(a - b) < eps, `${a} ≈ ${b}`);
@@ -49,4 +50,11 @@ test('analyse returns 9 cadences from 50 to 130', () => {
   assert.equal(a.patches, 18);
   assert.equal(a.ambidextrousGain, true);
   close(a.speeds[4].mph, 17.98);
+});
+
+test('ETRTO converts to a circumference close to the measured table', () => {
+  assert.equal(parseEtrto('23-622'), 2099);   // table: 2097
+  assert.equal(parseEtrto('25 x 622'), 2111); // table: 2105
+  assert.equal(parseEtrto('2105'), null);
+  assert.equal(parseEtrto('abc'), null);
 });

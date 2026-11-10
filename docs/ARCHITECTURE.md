@@ -39,7 +39,7 @@ Tire circumferences (mm) are Sheldon Brown's cyclecomputer calibration values.
   (ratio × wheel diameter, Sheldon Brown's convention) in imperial, and
   **development in metres** in metric. Both are visible in a secondary line.
 - Tire list had typos/duplicates (`26x1'/2`, two 571-25 rows). Clean it, add
-  common modern sizes (700x30, 700x40, 650B), and a **custom circumference** input.
+  common modern sizes (700x30, 700x40), ETRTO shown for every tire, and a **custom** input that accepts a circumference in mm or an ETRTO size (e.g. 25-622 → π × (622 + 2 × 25)).
 - Teeth ranges widened (ring 20–70, sprocket 9–30) with numeric steppers, not 32-item selects.
 - Equivalent gears also show their skid patch count, so you can pick a
   same-feel gear with better tire wear. This is the most useful missing feature.
