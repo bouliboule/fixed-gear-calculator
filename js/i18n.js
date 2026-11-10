@@ -1,6 +1,8 @@
 const ORIGINAL = 'https://www.surplace.fr/ffgc/';
 const ARCHIVE = 'https://web.archive.org/web/20260414030900/https://www.surplace.fr/ffgc/';
 const a = (href, text) => `<a href="${href}" rel="noopener">${text}</a>`;
+const EMAIL = 'bouliworks@gmail.com';
+const mail = subject => `<a href="mailto:${EMAIL}?subject=${encodeURIComponent(subject)}">${EMAIL}</a>`;
 
 export const STRINGS = {
   en: {
@@ -25,7 +27,8 @@ export const STRINGS = {
     drawing: (p, amb) => amb ? `Wheel with ${p} skid patches, ${amb} with ambidextrous skidding` : `Wheel with ${p} skid patches`,
     footer: `All credit: ${a(ORIGINAL, 'SURPLACE')} (the calculator) ·
       ${a('https://www.sheldonbrown.com/', 'Sheldon Brown')} (tire data, gear theory) ·
-      lajalousie (ambidextrous method) · ${a('https://github.com/bouliboule/fixed-gear-calculator', 'Source')} · Public domain`,
+      lajalousie (ambidextrous method) · ${a('https://github.com/bouliboule/fixed-gear-calculator', 'Source')} · Public domain<br>
+      Takedown or correction request: ${mail('Fixed Gear Calculator: takedown / correction')}`,
     close: 'Close',
     help: {
       ratio: ['Ratio', `<p>Chainring teeth divided by sprocket teeth: how many times the rear wheel turns for each turn of the pedals.</p>
@@ -44,8 +47,10 @@ export const STRINGS = {
       available if ${a(ORIGINAL, 'the original')} goes down. All credit belongs to them.</p>
       <p>Tire circumferences come from ${a('https://www.sheldonbrown.com/', 'Sheldon Brown')}'s website.
       The ambidextrous skid patch method was corrected by lajalousie.</p>
-      <p>The code is a clean rewrite released into the public domain. If the SURPLACE team would like
-      this page changed or taken down, it will be.</p>`,
+      <p>The code is a clean rewrite released into the public domain.</p>
+      <p><strong>Want this page changed or taken down?</strong> If you are part of the SURPLACE team,
+      or have any other concern, email ${mail('Fixed Gear Calculator: takedown / correction')}.
+      It will be done promptly, no questions asked.</p>`,
   },
   fr: {
     tributeTitle: 'Ceci est une copie de sauvegarde, pas une œuvre originale.',
@@ -69,7 +74,8 @@ export const STRINGS = {
     drawing: (p, amb) => amb ? `Roue avec ${p} skid patchs, ${amb} en ambidextre` : `Roue avec ${p} skid patchs`,
     footer: `Tout le mérite : ${a(ORIGINAL, 'SURPLACE')} (le calculateur) ·
       ${a('https://www.sheldonbrown.com/', 'Sheldon Brown')} (données pneus, théorie) ·
-      lajalousie (méthode ambidextre) · ${a('https://github.com/bouliboule/fixed-gear-calculator', 'Code source')} · Domaine public`,
+      lajalousie (méthode ambidextre) · ${a('https://github.com/bouliboule/fixed-gear-calculator', 'Code source')} · Domaine public<br>
+      Demande de retrait ou de correction : ${mail('Calculateur Pignon Fixe : retrait / correction')}`,
     close: 'Fermer',
     help: {
       ratio: ['Ratio', `<p>Le rapport entre le nombre de dents du plateau et du pignon, c'est-à-dire le nombre de tours de roue pour un tour de pédalier.</p>
@@ -88,8 +94,10 @@ export const STRINGS = {
       reste disponible si ${a(ORIGINAL, "l'original")} disparaît. Tout le mérite leur revient.</p>
       <p>Les circonférences de pneu proviennent du site de ${a('https://www.sheldonbrown.com/', 'Sheldon Brown')}.
       La méthode de calcul des skid patchs ambidextres a été corrigée par lajalousie.</p>
-      <p>Le code est une réécriture placée dans le domaine public. Si l'équipe SURPLACE souhaite que
-      cette page soit modifiée ou retirée, elle le sera.</p>`,
+      <p>Le code est une réécriture placée dans le domaine public.</p>
+      <p><strong>Vous souhaitez que cette page soit modifiée ou retirée ?</strong> Si vous faites partie de
+      l'équipe SURPLACE, ou pour toute autre demande, écrivez à ${mail('Calculateur Pignon Fixe : retrait / correction')}.
+      Ce sera fait rapidement, sans discussion.</p>`,
   },
 };
 

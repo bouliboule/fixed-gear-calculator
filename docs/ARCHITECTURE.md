@@ -136,7 +136,8 @@ One `render()` runs on every change, like the original's `draw()`. No virtual DO
   maintainer — holds a copyright notice over it.
 - Clean rewrite: no code, logo or images from surplace.fr are reused. The archived
   copy stays local as a behavioural reference and is not published.
-- Takedown: if the SURPLACE team asks, the page is replaced by a link to them.
+- Takedown: a contact address (bouliworks@gmail.com) is shown in the footer, About dialog and README.
+  On request, the page is changed or replaced by a link to the original.
 
 ## 7. Build phases
 
