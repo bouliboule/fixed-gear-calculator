@@ -1,5 +1,5 @@
 import { analyse, RING_MIN, RING_MAX, SPROCKET_MIN, SPROCKET_MAX, clamp } from './calc.js';
-import { TIRE_GROUPS, CUSTOM } from './tires.js';
+import { TIRE_GROUPS, CUSTOM, parseEtrto } from './tires.js';
 import { STRINGS, fmt } from './i18n.js';
 import { initialState, normalise, save, toHash, circumference } from './state.js';
 import { drawWheel } from './wheel.js';
@@ -11,8 +11,8 @@ const t = () => STRINGS[state.lang];
 function buildTireSelect() {
   const sel = $('tire');
   sel.innerHTML = TIRE_GROUPS.map(g =>
-    `<optgroup label="${g.group}">${g.tires.map(([id, label, mm]) =>
-      `<option value="${id}">${label} — ${mm} mm</option>`).join('')}</optgroup>`).join('')
+    `<optgroup label="${g.group}">${g.tires.map(([id, name, etrto, mm]) =>
+      `<option value="${id}">${name}${etrto ? ` · ETRTO ${etrto}` : ''} · ${mm} mm</option>`).join('')}</optgroup>`).join('')
     + `<option value="${CUSTOM}" id="opt-custom"></option>`;
 }
 
@@ -38,6 +38,7 @@ function render() {
   $('tire').value = state.tire;
   $('custom-row').hidden = state.tire !== CUSTOM;
   $('custom').value = state.customMm;
+  $('custom-hint').textContent = state.tire === CUSTOM ? state.customHint || '' : '';
   $('ambi').checked = state.ambidextrous;
   $(`l-${state.lang}`).checked = true;
   $(`u-${state.unit}`).checked = true;
@@ -115,7 +116,12 @@ function wire() {
     });
   });
   $('tire').addEventListener('change', e => { state.tire = e.target.value; render(); });
-  $('custom').addEventListener('change', e => { state.customMm = +e.target.value; render(); });
+  $('custom').addEventListener('change', e => {
+    const raw = e.target.value, fromEtrto = parseEtrto(raw);
+    state.customMm = fromEtrto ?? (parseInt(raw, 10) || state.customMm);
+    state.customHint = fromEtrto ? `ETRTO ${raw.trim()} ≈ ${fromEtrto} mm` : '';
+    render();
+  });
   $('ambi').addEventListener('change', e => { state.ambidextrous = e.target.checked; render(); });
   document.querySelectorAll('input[name=lang]').forEach(el =>
     el.addEventListener('change', () => { state.lang = el.value; applyLanguage(); render(); }));
