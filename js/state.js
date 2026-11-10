@@ -2,15 +2,6 @@ import { RING_MIN, RING_MAX, SPROCKET_MIN, SPROCKET_MAX, clamp } from './calc.js
 import { TIRES, DEFAULT_TIRE, CUSTOM } from './tires.js';
 
 const KEY = 'fgc-settings';
-const IMPERIAL_REGIONS = ['US', 'GB', 'LR', 'MM'];
-
-function detect() {
-  const langs = navigator.languages?.length ? navigator.languages : [navigator.language || 'en'];
-  const lang = langs[0].toLowerCase().startsWith('fr') ? 'fr' : 'en';
-  const region = (langs[0].split('-')[1] || '').toUpperCase();
-  const unit = IMPERIAL_REGIONS.includes(region) || (lang === 'en' && !region) ? 'i' : 'm';
-  return { lang, unit };
-}
 
 function load() {
   try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch { return {}; }
@@ -48,7 +39,7 @@ export function toHash(s) {
 
 export function initialState() {
   const s = { ring: 46, sprocket: 18, tire: DEFAULT_TIRE, customMm: 2100, ambidextrous: false,
-    ...detect(), ...load(), ...fromHash() };
+    lang: 'en', unit: 'm', ...load(), ...fromHash() };
   return normalise(s);
 }
 
