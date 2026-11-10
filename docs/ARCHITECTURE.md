@@ -103,8 +103,8 @@ One `render()` runs on every change, like the original's `draw()`. No virtual DO
 
 ## 4. Internationalisation and units
 
-- One page, runtime switch. Language: `?lang=` / saved choice / `navigator.languages` (fr* ⇒ FR, else EN).
-- Units: saved choice, else imperial for US/GB/LR/MM regions, metric elsewhere.
+- One page, runtime switch between EN and FR.
+- Defaults: English and metric. A saved choice or the URL overrides them.
 - Language and unit are **independent** (a French speaker can pick mph).
 - Numbers via `Intl.NumberFormat(lang)` — gives the French decimal comma for free.
 - `<html lang>` updated on switch; strings in `data-i18n` attributes.
