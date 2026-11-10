@@ -32,7 +32,13 @@ The page is in English and French, with metric and imperial units.
 - **[Sheldon Brown](https://www.sheldonbrown.com/)**: tire circumference data and gear theory.
 - **lajalousie**: the corrected ambidextrous skid patch method.
 
-If the SURPLACE team would like this copy changed or taken down, open an issue and it will be.
+## Takedown / retrait
+
+If you are part of the SURPLACE team, or have any other concern, and want this copy changed or taken down,
+email **bouliworks@gmail.com**. It will be done promptly, no questions asked.
+
+Si vous faites partie de l'équipe SURPLACE, ou pour toute autre demande, et souhaitez que cette copie soit
+modifiée ou retirée, écrivez à **bouliworks@gmail.com**. Ce sera fait rapidement, sans discussion.
 
 ## Development
 
